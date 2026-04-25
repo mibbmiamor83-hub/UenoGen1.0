@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UenoGen | Access Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-neon: #00f2ff;
+            --secondary-neon: #7000ff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: radial-gradient(circle at top center, #1a1a2e 0%, #0f0f1a 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+            padding: 20px 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--primary-neon), var(--secondary-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilo de las Cards */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-neon);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .card i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary-neon);
+        }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        /* Secciones de contenido ocultas */
+        .content-area {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px dashed var(--glass-border);
+            animation: slideDown 0.4s ease-out;
+        }
+
+        /* Estilo del Token */
+        .token-box {
+            font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            color: var(--primary-neon);
+            font-weight: bold;
+            padding: 10px;
+            display: block;
+            margin: 10px 0;
+            background: rgba(0, 242, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .badge-timer {
+            font-size: 0.85rem;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Botón WhatsApp */
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128c7e;
+            transform: scale(1.05);
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 250px; }
+        }
+
+        .active { border-color: var(--secondary-neon) !important; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>UENO<span>GEN</span></h1>
+
+    <div class="card" onclick="toggleContent('colaboradores')">
+        <i class="fas fa-user-shield"></i>
+        <h2>Acceso Colaboradores</h2>
+        <div id="colaboradores" class="content-area">
+            <p style="color: #ff4d4d; font-weight: bold;">
+                <i class="fas fa-lock"></i> ÁREA RESTRINGIDA
+            </p>
+            <p style="font-size: 0.9rem;">Este apartado es exclusivo para el equipo de desarrollo y colaboradores autorizados.</p>
+        </div>
+    </div>
+
+    <div class="card" onclick="toggleContent('token')">
+        <i class="fas fa-key"></i>
+        <h2>Obtener Token Gratis</h2>
+        <div id="token" class="content-area">
+            <span class="token-box">UENO-878-DXRI</span>
+            <div style="margin-bottom: 10px;">
+                <small>Vencimiento: 2 horas</small>
+            </div>
+            <div class="badge-timer">
+                <i class="fas fa-sync-alt fa-spin"></i>
+                <span>Este token se actualiza automáticamente cada 120 minutos.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" onclick="toggleContent('ayuda')">
+        <i class="fas fa-headset" style="color: #25d366;"></i>
+        <h2>¿Necesitas ayuda?</h2>
+        <div id="ayuda" class="content-area">
+            <p style="font-size: 0.9rem; margin-bottom: 15px;">Si tienes problemas con el token o la aplicación, contáctame directamente.</p>
+            <a href="https://wa.me/595985597437" class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp" style="margin:0; font-size: 1.5rem; color: white;"></i> Chat soporte
+            </a>
+        </div>
+    </div>
+
+    <p style="font-size: 0.7rem; color: #555; margin-top: 40px;">
+        &copy; 2026 DXRIO DEV | Todos los derechos reservados.
+    </p>
+</div>
+
+<script>
+    function toggleContent(id) {
+        const content = document.getElementById(id);
+        const isVisible = content.style.display === 'block';
+        
+        // Cerrar todos primero
+        document.querySelectorAll('.content-area').forEach(el => el.style.display = 'none');
+        
+        // Abrir el seleccionado si no estaba visible
+        if (!isVisible) {
+            content.style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
